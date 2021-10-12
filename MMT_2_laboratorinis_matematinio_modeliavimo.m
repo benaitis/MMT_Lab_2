@@ -26,8 +26,9 @@ for i = 1:length(approximationRows)
     x0 = 0;
     y3pade = polyval(num, x-x0)./polyval(den, x-x0);
     y3taylor = polyval(t, x-x0);
-    subplot(2,3,i);
-    plot(x, y, x3, y3, '*', x, y3lagran, chebyX, chebyY, 'o', x, y3cheby, x, y3pade, x, y3taylor);
+    figure(i)
+%     plot(x, y, x3, y3, '*', x, y3lagran, chebyX, chebyY, 'o', x, y3cheby, x, y3pade, x, y3taylor);
+    plot(x, y, x3, y3, '*', x, y3lagran, chebyX, chebyY, 'o', x, y3cheby, x, y3pade);
     title(sprintf('%d eiles aproksimacija', eile));
     legend('real function', 'points', 'lagrange', 'cheby nodes', 'cheby', 'pade', 'taylor');
 end
@@ -50,10 +51,34 @@ end
 
 
 
-
-
-% 2 dalis 
-% variantas 1 = mod(20162566, 3)
+% % 2 dalis 
+% % variantas 1 = mod(20162566, 3)
+% close all
+% clear all
+% 
+% load data2;
+% y_changed = log(yd2'./x2');
+% figure(3)
+% plot(x2, yd2, '.', x2, y_changed, '*')
+% 
+% A2 = [x2' ones(size(x2'))];
+% a2_tmp = A2\y_changed;
+% % perkaiciuojame koeficientus
+% a2(1) = exp(a2_tmp(2));
+% a2(2) = a2_tmp(1);
+% 
+% 
+% a22 = lsqcurvefit(@f2, [0;0], x2, yd2);
+% x = linspace(1,5,100);
+% y_linear = f2(a2,x);
+% y_curvefit = f2(a22, x);
+% figure(4)
+% plot(x2, yd2, '.', x, y_linear, x, y_curvefit);
+% 
+% function y = f2(a,x)
+% disp(a);
+% y = a(1).*x.*exp(a(2)*x);
+% end
 
 
 
