@@ -1,0 +1,30 @@
+% 2 dalis 
+% variantas 1 = mod(20162566, 3)
+close all
+clear all
+
+% load data
+load data2;
+% turn function to new version as shown in table
+y_new = log(yd2'./x2');
+figure(3)
+% plot values of old and new/changed function values
+plot(x2, yd2, '.', x2, y_new, '*')
+
+% TLS sprendimas naudojant '\' operatoriu
+A2 = [x2' ones(size(x2'))]; % pasidedam x2 reiksmes i nauja masyva
+coeficients = A2\y_new; % sprendimas kuris talpinamas i laikina kintamaji
+a(1) = exp(coeficients(2));
+a2(2) = coeficients(1);
+% 
+% a22 = lsqcurvefit(@f2, [0;0], x2, yd2);
+% x = linspace(1,5,100);
+% y_linear = f2(a2,x);
+% y_curvefit = f2(a22, x);
+% figure(4)
+% plot(x2, yd2, '.', x, y_linear, x, y_curvefit);
+
+function y = f2(a,x)
+disp(a);
+y = a(1).*x.*exp(a(2)*x);
+end
